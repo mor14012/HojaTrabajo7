@@ -12,18 +12,30 @@ public class main{
 			String line;
 			while((line = file.readLine()) != null ){
 				String english=" ",  spanish=" ";
-				boolean readenglish, readspanish = false;
+				boolean readenglish = false;
+				boolean readspanish = false;
 				System.out.println(line);
-				for(int i=0; i<line.length(); i++){
-					if(line.charAt(i)=='(')
-						readenglish = true;
-					if(line.charAt(i)==')')
-						read = false;
-					if(line.charAt(i)==',')
-						read = false;
-					if(read==true)
-						english+= line.charAt(i);
+				int count = 0;
+				while(count<line.length()){
+					if(line.charAt(count)=='('){
+						while(true){
+							count++;
+							if(line.charAt(count)==',')
+								break;
+							english+=line.charAt(count);
+						}
+					}
+					if(line.charAt(count)==' ')
+						while(true){
+							count++;
+							if(line.charAt(count)==')')
+								break;
+							spanish+=line.charAt(count);
+						}
+					count++;
 				}
+				System.out.println("english:"+english);
+				System.out.println("spanish:"+spanish);
 			}
 			file.close();
 		}
@@ -33,7 +45,7 @@ public class main{
 		catch(IOException io){
 			System.out.println("Erro 2: Error en lectura del fichero.");
 		}
-		
+
 
 
 
